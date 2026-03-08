@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahmoud Magdy · mobile engineer</title>
+    <!-- Google Fonts & Font Awesome for clean icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f8faff 0%, #edf2f9 100%);
+            font-family: 'Inter', sans-serif;
+            color: #1a2639;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .portfolio-card {
+            max-width: 1300px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 3.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 20, 40, 0.35), 0 0 0 1px rgba(156, 180, 215, 0.25);
+            padding: 2.8rem 3rem;
+            transition: all 0.2s ease;
+        }
+
+        /* Profile header area — creative blend */
+        .profile-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .profile-avatar {
+            flex-shrink: 0;
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb, #38bdf8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 30px -8px #1e3a8a66;
+        }
+
+        .profile-avatar img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            background: white;
+            transition: transform 0.3s;
+        }
+
+        .profile-avatar:hover img {
+            transform: scale(1.02);
+        }
+
+        .title-section {
+            flex: 1;
+        }
+
+        .name {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            background: linear-gradient(145deg, #0f2b5e, #1e4880);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.3rem;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+            align-items: center;
+            margin: 0.8rem 0 1rem;
+        }
+
+        .senior-tag {
+            background: #1e3a5f;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            box-shadow: 0 4px 8px #0b1e33;
+            display: inline-block;
+            letter-spacing: 0.3px;
+        }
+
+        .location {
+            font-weight: 500;
+            color: #2c3e6d;
+            background: #d9e2f0;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2.2rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #1f3a64;
+            transition: 0.2s;
+            text-decoration: none;
+            background: rgba(255,255,255,0.6);
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid rgba(59, 91, 139, 0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        .contact-item i {
+            font-size: 1.3rem;
+            color: #2563eb;
+            width: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-item:hover {
+            background: white;
+            border-color: #3b6ab0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px -12px #1e3a8a;
+        }
+
+        .summary {
+            background: #eef4ff;
+            border-radius: 2.5rem;
+            padding: 1.8rem 2.2rem;
+            margin-bottom: 3rem;
+            border: 1px solid #c7d9f0;
+            box-shadow: inset 0 1px 4px white, 0 8px 12px -12px #1e2f4a;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0f2c4e;
+            backdrop-filter: blur(2px);
+        }
+
+        .summary strong {
+            color: #0351c7;
+            font-weight: 700;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        /* experience section */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #13294b;
+        }
+
+        .section-title i {
+            background: #1e3a5f;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 18px;
+            font-size: 1.2rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .exp-item {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 6px 16px #d3e0f0;
+            border-left: 8px solid #2563eb;
+            transition: 0.2s;
+        }
+
+        .exp-item:hover {
+            border-left-width: 10px;
+            border-left-color: #0e3b9e;
+        }
+
+        .exp-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .exp-company {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0e2647;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .exp-company a {
+            color: #1f3a64;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+        }
+
+        .exp-company a:hover {
+            border-bottom-color: #2563eb;
+        }
+
+        .exp-date {
+            font-weight: 600;
+            color: #2563eb;
+            background: #deeafc;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        .exp-role {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #021c3b;
+            margin: 0.5rem 0 0.6rem;
+        }
+
+        .exp-desc {
+            color: #2f405c;
+            margin-bottom: 0.8rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid #b3ceff;
+        }
+
+        .exp-desc li {
+            margin-left: 1.2rem;
+            list-style-type: disc;
+        }
+
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .tool-badge {
+            background: #e1ecfe;
+            color: #103a6b;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            border: 1px solid #a3c2ed;
+        }
+
+        /* right panel: skills, achievements, education */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .skill-block {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.8rem 1.8rem;
+            box-shadow: 0 10px 22px -14px #19335c;
+        }
+
+        .skill-block h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            color: #0a274a;
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-block h3 i {
+            color: #2563eb;
+            background: #e5efff;
+            padding: 0.4rem;
+            border-radius: 14px;
+        }
+
+        .skill-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-pill {
+            background: linear-gradient(115deg, #eef4ff, #dfebfc);
+            color: #091f40;
+            font-weight: 500;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            border: 1px solid #b7d0f0;
+            transition: 0.1s;
+        }
+
+        .skill-pill:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed #b7c9e2;
+        }
+
+        .achievement-item i {
+            color: #fbbf24;
+            font-size: 1.5rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .edu {
+            background: #f1f5fe;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.5rem;
+        }
+
+        .github-metrics {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            background: #dbe7f9;
+            border-radius: 80px;
+            padding: 1rem 1.2rem;
+            backdrop-filter: blur(2px);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric i {
+            font-size: 1.6rem;
+            color: #0b315b;
+        }
+
+        .metric span {
+            display: block;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* footer / extra links */
+        .footer-note {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+            padding-top: 1.2rem;
+            border-top: 2px solid rgba(59, 91, 139, 0.25);
+            font-size: 0.95rem;
+        }
+
+        .footer-note .tiny-credit {
+            color: #2c3e6d;
+        }
+
+        .footer-note .gh-corner i {
+            color: #1f3a64;
+            margin: 0 0.4rem;
+            font-size: 1.2rem;
+        }
+
+        /* placeholder for profile image — simple silhouette because no local image, but using fontawesome as fallback inside avatar circle.
+           we can simulate profile image using an inline svg or fontawesome; but you will replace with actual image. */
+        .avatar-placeholder {
+            background: #ffffff;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #1e3a5f;
+            border: 4px solid white;
+            box-shadow: 0 4px 14px #0000001a;
+        }
+
+        /* for mobile */
+        @media (max-width: 900px) {
+            .portfolio-card { padding: 1.8rem; }
+            .grid-2col { grid-template-columns: 1fr; }
+            .name { font-size: 2.5rem; }
+        }
+        @media (max-width: 550px) {
+            .profile-top { justify-content: center; text-align: center; }
+            .contact-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="portfolio-card">
+        <!-- profile row with image + contacts -->
+        <div class="profile-top">
+            <div class="profile-avatar">
+                <!-- PROFILE IMAGE – replace src with your actual image, e.g., profile.jpg -->
+                <img src="https://via.placeholder.com/130x130/1e3a5f/ffffff?text=Mahmoud" alt="Mahmoud Magdy">
+                <!-- you can replace the above src with your own image link (like from a github repo or linkedin photo) -->
+            </div>
+            <div class="title-section">
+                <h1 class="name">Mahmoud Magdy</h1>
+                <div class="badge-row">
+                    <span class="senior-tag"><i class="fas fa-code"></i> Sr. Mobile Engineer · 7+ yrs</span>
+                    <span class="location"><i class="fas fa-map-marker-alt"></i> Cairo, Egypt</span>
+                </div>
+                <!-- contact links: phone, email, linkedin, github with direct click -->
+                <div class="contact-links">
+                    <a href="tel:+201006574167" class="contact-item"><i class="fas fa-phone-alt"></i> +20 100 657 4167</a>
+                    <a href="mailto:mahmoud.magdy24m@gmail.com" class="contact-item"><i class="fas fa-envelope"></i> mahmoud.magdy24m</a>
+                    <a href="https://www.linkedin.com/in/mahmoudmagdy7" target="_blank" class="contact-item"><i class="fab fa-linkedin-in"></i> mahmoudmagdy7</a>
+                    <a href="https://github.com/EngMahmoudMagdy" target="_blank" class="contact-item"><i class="fab fa-github"></i> EngMahmoudMagdy</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- short professional summary (from doc) -->
+        <div class="summary">
+            <i class="fas fa-quote-left" style="color: #2563eb; opacity:0.7; margin-right:6px;"></i>
+            Senior Mobile Application Engineer with <strong>7+ years</strong> (4 Android · 3 Flutter). Built over <strong>10 innovative apps</strong> with teams from Egypt, Netherlands, USA, and Gulf region.
+        </div>
+
+        <!-- main two columns: experience (left) and right panel with skills, achievements, education -->
+        <div class="grid-2col">
+            <!-- left: experience timeline -->
+            <div>
+                <div class="section-title">
+                    <i class="fas fa-briefcase"></i> <span>experience</span>
+                </div>
+                <div class="timeline">
+
+                    <!-- Mazaady -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-company">
+                                <a href="https://mazaady.com/" target="_blank">Mazaady</a> · Dubai (Remote)
+                            </span>
+                            <span class="exp-date">Feb 2024 – Present</span>
+                        </div>
+                        <div class="exp-role">Senior Android Developer</div>
+                        <ul class="exp-desc" style="list-style-type: disc; padding-left: 1.2rem;">
+                            <li>Maintained Mazaady app used by <strong>100k+</strong> users</li>
+                            <li>Developed features for Doworkss App (<strong>100k+</strong> downloads)</li>
+                            <li>Built JobSeekk app — hiring platform with offers & communication</li>
+                        </ul>
+                        <div class="tools">
+                            <span class="tool-badge">Kotlin</span><span class="tool-badge">Android SDK</span><span class="tool-badge">XML</span><span class="tool-badge">Clean Arch</span><span class="tool-badge">REST API</span><span class="tool-badge">JIRA</span><span class="tool-badge">Figma</span>
+                        </div>
+                    </div>
+
+                    <!-- LBC Fleet -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-company">LBC Fleet · Arizona, USA (Remote)</span>
+                            <span class="exp-date">Apr 2023 – Feb 2024</span>
+                        </div>
+                        <div class="exp-role">Senior Mobile Developer</div>
+                        <ul class="exp-desc" style="padding-left: 1.2rem;">
+                            <li>Maintained Android Driver app for 500+ truck drivers</li>
+                            <li>Developed Flutter app for iOS/Android — resolved performance</li>
+                            <li>Accident reporting & body damage tracking feature</li>
+                        </ul>
+                        <div class="tools">
+                            <span class="tool-badge">Flutter</span><span class="tool-badge">Dart</span><span class="tool-badge">Java</span><span class="tool-badge">TDD</span><span class="tool-badge">Clean Arch</span><span class="tool-badge">BloC</span><span class="tool-badge">XCode</span>
+                        </div>
+                    </div>
+
+                    <!-- Extenda Retail -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-company"><a href="https://www.extendaretail.com/" target="_blank">Extenda Retail</a> · Amsterdam (Remote)</span>
+                            <span class="exp-date">Jan 2022 – Apr 2023</span>
+                        </div>
+                        <div class="exp-role">Mobile Engineer</div>
+                        <ul class="exp-desc" style="padding-left: 1.2rem;">
+                            <li>Maintained My-Scan & MyAttendant for 5 retail chains in Europe</li>
+                            <li>Developed white-label generic Flutter app + Side-Kick (Zebra EMDK)</li>
+                        </ul>
+                        <div class="tools">
+                            <span class="tool-badge">Flutter</span><span class="tool-badge">TDD</span><span class="tool-badge">MQTT</span><span class="tool-badge">Clean Arch</span><span class="tool-badge">Jenkins</span><span class="tool-badge">Zebra</span>
+                        </div>
+                    </div>
+
+                    <!-- Koinz -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-company">Koinz · Cairo (Hybrid)</span>
+                            <span class="exp-date">Nov 2020 – Jan 2022</span>
+                        </div>
+                        <div class="exp-role">Android Engineer</div>
+                        <ul class="exp-desc" style="padding-left: 1.2rem;">
+                            <li>Migrated payment from HyperPay to Amazon Payfort</li>
+                            <li>Social Virality feature for 30k+ active users</li>
+                            <li>Enhanced entry points for 800k+ Android users</li>
+                        </ul>
+                        <div class="tools">
+                            <span class="tool-badge">Kotlin</span><span class="tool-badge">Unit Test</span><span class="tool-badge">Firebase</span><span class="tool-badge">Amplitude</span><span class="tool-badge">GitLab CI</span>
+                        </div>
+                    </div>
+
+                    <!-- Black Squares -->
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="exp-company">Black Squares Solutions · Cairo (Hybrid)</span>
+                            <span class="exp-date">Nov 2018 – Oct 2020</span>
+                        </div>
+                        <div class="exp-role">Android Developer</div>
+                        <ul class="exp-desc" style="padding-left: 1.2rem;">
+                            <li>Developed Zari marketplace (buy/sell cars, products)</li>
+                            <li>Boosted performance 65% with GraphQL + Firebase realtime</li>
+                        </ul>
+                        <div class="tools">
+                            <span class="tool-badge">GraphQL</span><span class="tool-badge">Apollo</span><span class="tool-badge">Kotlin</span><span class="tool-badge">Firebase</span><span class="tool-badge">Adobe XD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- right column: skills, achievements, education, github -->
+            <div class="right-panel">
+                <!-- skills (languages & architectures) from CV -->
+                <div class="skill-block">
+                    <h3><i class="fas fa-cogs"></i> core skills</h3>
+                    <div class="skill-cloud">
+                        <span class="skill-pill">Kotlin</span><span class="skill-pill">Java</span><span class="skill-pill">Dart</span>
+                        <span class="skill-pill">Flutter</span><span class="skill-pill">Android SDK</span>
+                        <span class="skill-pill">Jetpack Compose</span><span class="skill-pill">GraphQL</span>
+                        <span class="skill-pill">FCM</span><span class="skill-pill">Coroutines</span>
+                        <span class="skill-pill">Flow</span><span class="skill-pill">MVVM</span>
+                        <span class="skill-pill">MVI</span><span class="skill-pill">Clean Arch</span>
+                        <span class="skill-pill">SOLID</span><span class="skill-pill">TDD</span>
+                        <span class="skill-pill">BloC</span><span class="skill-pill">RiverPod</span>
+                        <span class="skill-pill">CI/CD Jenkins</span><span class="skill-pill">MQTT</span>
+                        <span class="skill-pill">Git</span><span class="skill-pill">JIRA</span><span class="skill-pill">Figma</span>
+                    </div>
+                </div>
+
+                <!-- achievements + education combined -->
+                <div class="skill-block" style="padding-bottom: 1rem;">
+                    <h3><i class="fas fa-trophy"></i> achievements & education</h3>
+                    <div class="achievement-item">
+                        <i class="fas fa-award"></i> <span>Mobile Application Launchpad · Google, MCIT (2016)</span>
+                    </div>
+                    <div class="achievement-item">
+                        <i class="fas fa-graduation-cap"></i> <span>B.Sc. Computer Engineering, Benha University (2013–2018)</span>
+                    </div>
+                    <div style="margin-top: 1.2rem;">
+                        <div class="edu">
+                            <i class="fas fa-rocket" style="color: #1e3a5f; margin-right: 8px;"></i> 
+                            <strong>10+ apps shipped</strong> — teams from Egypt, Netherlands, USA, Gulf.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- github / contact dynamic mini section -->
+                <div class="skill-block" style="background: #dce6f5;">
+                    <h3><i class="fab fa-github"></i> github snapshot</h3>
+                    <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                        <i class="fab fa-github" style="font-size: 2.5rem; color: #0a1f3a;"></i>
+                        <span style="font-weight: 600;"><a href="https://github.com/EngMahmoudMagdy" target="_blank" style="text-decoration: none; color: #0b2d5c;">@EngMahmoudMagdy</a></span>
+                    </div>
+                    <div class="github-metrics" style="margin-top: 1.2rem; background: white;">
+                        <div class="metric"><i class="fas fa-code-branch"></i><span>7+ yrs</span></div>
+                        <div class="metric"><i class="fas fa-project-diagram"></i><span>10+ apps</span></div>
+                        <div class="metric"><i class="fas fa-star"></i><span>4 countries</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer with additional link to email/github (clean) -->
+        <div class="footer-note">
+            <div class="tiny-credit">
+                <i class="far fa-copy"></i> 2025 Mahmoud Magdy – open to collaborations
+            </div>
+            <div class="gh-corner">
+                <a href="https://github.com/EngMahmoudMagdy" target="_blank" style="text-decoration: none; color:#1f3a64;"><i class="fab fa-github"></i> EngMahmoudMagdy</a>
+                <span style="margin:0 0.5rem;">·</span>
+                <a href="https://www.linkedin.com/in/mahmoudmagdy7" target="_blank" style="text-decoration: none; color:#1f3a64;"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- tiny note: replace placeholder image with actual mahmoud profile pic -->
+</body>
+</html>
