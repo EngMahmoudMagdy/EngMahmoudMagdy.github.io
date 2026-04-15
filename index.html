@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mahmoud Magdy · senior mobile engineer</title>
-  <!-- Font Awesome 6 (free) -->
+  <link rel="icon" href="badges/android-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts: Inter & Fira Code for that dev look -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * {
@@ -15,12 +14,16 @@
         box-sizing: border-box;
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         background: #0b1622;
         font-family: 'Inter', sans-serif;
         color: #e9f1fb;
         line-height: 1.5;
-        padding: 2rem 1.5rem;
+        padding: 0 1.5rem 2rem;
         display: flex;
         justify-content: center;
     }
@@ -28,11 +31,158 @@
     .container {
         max-width: 1280px;
         width: 100%;
+        padding-top: 4.75rem;
     }
 
-    /* header / top card */
+    /* ——— Site nav ——— */
+    .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(11, 22, 34, 0.92);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #2c405b;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
+    .site-header-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0.65rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .nav-brand {
+        font-weight: 800;
+        font-size: 1rem;
+        color: #e9f1fb;
+        text-decoration: none;
+        letter-spacing: -0.02em;
+    }
+
+    .nav-brand span { color: #94a9c9; font-weight: 600; }
+
+    .nav-desktop {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .nav-link {
+        color: #b9d0f0;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+        background: #1f3147;
+        border-color: #405d82;
+        color: #fff;
+        outline: none;
+    }
+
+    .nav-toggle {
+        display: none;
+        background: #1f3147;
+        border: 1px solid #405d82;
+        color: #facc15;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.25rem;
+    }
+
+    .nav-toggle:hover { background: #2b405d; }
+
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.55);
+        z-index: 1001;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+    }
+
+    .nav-overlay.is-open {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: min(300px, 88vw);
+        height: 100vh;
+        background: linear-gradient(180deg, #0e1d2f 0%, #0b1622 100%);
+        border-right: 1px solid #344e72;
+        z-index: 1002;
+        padding: 1.25rem 1rem 2rem;
+        transform: translateX(-100%);
+        transition: transform 0.28s ease;
+        box-shadow: 8px 0 32px rgba(0,0,0,0.5);
+        overflow-y: auto;
+    }
+
+    .nav-drawer.is-open { transform: translateX(0); }
+
+    .nav-drawer-title {
+        font-weight: 800;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #2f4463;
+        color: #facc15;
+    }
+
+    .nav-drawer .nav-link {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.35rem;
+        border-radius: 12px;
+    }
+
+    .drawer-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: #1a2c42;
+        border: 1px solid #405d82;
+        color: #e9f1fb;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+        .nav-desktop { display: none; }
+        .nav-toggle { display: flex; }
+    }
+
+    /* intro / top card */
     .intro-card {
-        background: #111f31;
         background: linear-gradient(145deg, #0e1d2f 0%, #15273f 100%);
         border-radius: 2.5rem;
         padding: 2.2rem 2.5rem;
@@ -41,9 +191,9 @@
         border: 1px solid #3f556e;
         position: relative;
         overflow: hidden;
+        scroll-margin-top: 5rem;
     }
 
-    /* subtle background pattern */
     .intro-card::before {
         content: "";
         position: absolute;
@@ -81,9 +231,7 @@
         border-color: #3b82f6;
     }
 
-    .name-title {
-        flex: 1;
-    }
+    .name-title { flex: 1; }
 
     .open-badge {
         background: #10b981;
@@ -158,7 +306,6 @@
         font-size: 0.9rem;
     }
 
-    /* contact row */
     .contact-row {
         display: flex;
         flex-wrap: wrap;
@@ -195,7 +342,6 @@
         transform: translateY(-2px);
     }
 
-    /* code snippet card — like class MohamedHussein */
     .code-snippet {
         background: #091a2c;
         border-radius: 2rem;
@@ -204,6 +350,7 @@
         border: 1px solid #3a5b82;
         box-shadow: inset 0 0 15px #010814, 0 10px 20px -5px #030b14;
         margin-bottom: 2.5rem;
+        scroll-margin-top: 5rem;
     }
 
     .code-snippet pre {
@@ -218,15 +365,14 @@
     .code-snippet .string { color: #a3e635; }
     .code-snippet .property { color: #60a5fa; }
 
-    /* main grid */
     .grid-2col {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1.8rem;
         margin-bottom: 2.5rem;
+        scroll-margin-top: 5rem;
     }
 
-    /* about panel (left) */
     .glass-panel {
         background: #0f1e2f;
         border-radius: 2.2rem;
@@ -242,6 +388,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        scroll-margin-top: 5rem;
     }
 
     .section-title i {
@@ -280,7 +427,6 @@
         color: #f0f4fe;
     }
 
-    /* skills cloud (right) */
     .skills-cloud {
         display: flex;
         flex-wrap: wrap;
@@ -314,45 +460,217 @@
         letter-spacing: 0.5px;
     }
 
-    /* project cards */
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        margin-top: 1.2rem;
+    /* ——— Projects ——— */
+    .projects-section {
+        scroll-margin-top: 5rem;
+        margin: 2.5rem 0 1rem;
+        /* Height of phone-style thumbs (width 118px × 9:19) — used to align MyScan landscape shot */
+        --project-shot-h: calc(118px * 19 / 9);
     }
 
-    .project-card {
-        background: #132336;
-        border-radius: 2rem;
-        padding: 1.6rem;
-        border: 1px solid #344e72;
-        transition: 0.2s;
-    }
-
-    .project-card:hover {
-        border-color: #facc15;
-        background: #1b2e46;
-    }
-
-    .project-name {
-        font-size: 1.4rem;
+    .projects-subtitle {
+        font-size: 1.35rem;
         font-weight: 700;
+        color: #facc15;
+        margin: 2rem 0 1rem;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 0.5rem;
     }
 
-    .project-platform {
+    .projects-subtitle:first-of-type { margin-top: 0.5rem; }
+
+    .projects-subtitle-flutter {
+        height: 1.85rem;
+        width: auto;
+        display: block;
+        object-fit: contain;
+    }
+
+    .projects-grid-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .project-showcase {
+        width: 100%;
+        background: #122337;
+        border-radius: 2rem;
+        padding: 1.6rem;
+        transition: background 0.2s;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        min-height: 0;
+        height: 100%;
+    }
+
+    .project-showcase:hover {
+        background: #1a2e46;
+    }
+
+    /* MyScan: one full-width row; text + wide screenshot side by side */
+    .project-showcase--fullrow {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+        gap: 1.25rem;
+        align-items: stretch;
+    }
+
+    .project-showcase--fullrow .project-showcase-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        min-width: 0;
+    }
+
+    .project-showcase--fullrow .project-screenshots--landscape {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: var(--project-shot-h);
+        max-height: var(--project-shot-h);
+        padding: 0.4rem 0.6rem;
+        background: #0a1520;
+        border-radius: 12px;
+        border: 1px solid #2f4463;
+        box-sizing: border-box;
+    }
+
+    .project-showcase--fullrow .project-screenshots--landscape img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        aspect-ratio: unset;
+        object-fit: contain;
+        object-position: center;
+        border-radius: 8px;
+        border: none;
+        background: transparent;
+    }
+
+    @media (max-width: 720px) {
+        .project-showcase--fullrow {
+            grid-template-columns: 1fr;
+        }
+
+        .project-showcase--fullrow .project-screenshots--landscape {
+            max-height: none;
+            min-height: auto;
+            padding: 0.5rem 0.65rem;
+        }
+
+        .project-showcase--fullrow .project-screenshots--landscape img {
+            max-height: min(42vh, 300px);
+            width: 100%;
+        }
+    }
+
+    .project-showcase-top {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .project-logo-link {
+        flex-shrink: 0;
+        display: block;
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #1a2c42;
+        border: 1px solid #405d82;
+        transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .project-logo-link:hover { transform: scale(1.03); border-color: #facc15; }
+    .project-logo-link img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .project-logo-static {
+        flex-shrink: 0;
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #1a2c42;
+        border: 1px solid #405d82;
+    }
+
+    .project-logo-static img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .project-showcase-heading { flex: 1; min-width: 0; }
+
+    .project-showcase-name {
+        font-size: 1.35rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 0.25rem;
+    }
+
+    .project-showcase-meta {
         color: #90b0da;
-        font-size: 0.9rem;
-        margin: 0.4rem 0 0.6rem;
+        font-size: 0.88rem;
     }
 
-    .project-desc {
+    .project-showcase-desc {
         color: #b3c7e5;
         font-size: 0.95rem;
-        margin: 0.5rem 0 0.8rem;
+        line-height: 1.55;
+    }
+
+    .project-screenshots {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .project-showcase:not(.project-showcase--fullrow) .project-screenshots img {
+        width: 118px;
+        max-width: 100%;
+        aspect-ratio: 9 / 19;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 1px solid #2f4463;
+        background: #0a1520;
+    }
+
+    .store-badges {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.65rem;
+        margin-top: auto;
+        padding-top: 0.25rem;
+    }
+
+    .store-badges a {
+        display: inline-block;
+        line-height: 0;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .store-badges a:hover { transform: translateY(-2px); opacity: 0.95; }
+
+    .store-badges img {
+        height: 40px;
+        width: auto;
+        display: block;
     }
 
     .project-tags {
@@ -370,7 +688,8 @@
         font-weight: 600;
     }
 
-    /* journey (experience) */
+    .exp-block { scroll-margin-top: 5rem; }
+
     .exp-item {
         background: #122337;
         border-radius: 2rem;
@@ -389,9 +708,7 @@
         font-size: 1.3rem;
     }
 
-    .exp-date {
-        color: #facc15;
-    }
+    .exp-date { color: #facc15; }
 
     .exp-company {
         color: #aac3e6;
@@ -418,11 +735,38 @@
   </style>
 </head>
 <body>
+  <header class="site-header" role="banner">
+    <div class="site-header-inner">
+      <a class="nav-brand" href="#home">Mahmoud <span>Magdy</span></a>
+      <nav class="nav-desktop" aria-label="Primary">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#spotlight">Code</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#experience">Experience</a>
+        <a class="nav-link" href="#projects">Projects</a>
+      </nav>
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay" hidden></div>
+  <aside class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <button type="button" class="drawer-close" id="navDrawerClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    <div class="nav-drawer-title">Navigate</div>
+    <nav aria-label="Mobile">
+      <a class="nav-link" href="#home">Home</a>
+      <a class="nav-link" href="#spotlight">Code</a>
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#experience">Experience</a>
+      <a class="nav-link" href="#projects">Projects</a>
+    </nav>
+  </aside>
+
 <div class="container">
-  <!-- open to work + name / headline with photo -->
-  <div class="intro-card">
+  <div class="intro-card" id="home">
     <div class="profile-row">
-      <!-- YOUR PHOTO HERE - replace the src with your actual image URL -->
       <img src="profile_photo.jpeg"
            alt="Mahmoud Magdy"
            class="profile-photo"
@@ -437,7 +781,6 @@
       </div>
     </div>
 
-    <!-- stats row: like 20+ apps delivered etc -->
     <div class="stats-row">
       <div class="stat-item"><span class="stat-number">10+</span> <span class="stat-label">apps in prod</span></div>
       <div class="stat-item"><span class="stat-number">7+</span> <span class="stat-label">years exp</span></div>
@@ -445,17 +788,15 @@
       <div class="stat-item"><span class="stat-number">2</span> <span class="stat-label">open source libs</span></div>
     </div>
 
-    <!-- contact links (github, linkedin, email, phone) -->
     <div class="contact-row">
       <a href="tel:+201006574167" class="contact-item"><i class="fas fa-phone-alt"></i> +20 100 657 4167</a>
       <a href="mailto:mahmoud.magdy24m@gmail.com" class="contact-item"><i class="fas fa-envelope"></i> mahmoud.magdy24m</a>
-      <a href="https://www.linkedin.com/in/mahmoudmagdy7" target="_blank" class="contact-item"><i class="fab fa-linkedin-in"></i> mahmoudmagdy7</a>
-      <a href="https://github.com/EngMahmoudMagdy" target="_blank" class="contact-item"><i class="fab fa-github"></i> EngMahmoudMagdy</a>
+      <a href="https://www.linkedin.com/in/mahmoudmagdy7" target="_blank" rel="noopener noreferrer" class="contact-item"><i class="fab fa-linkedin-in"></i> mahmoudmagdy7</a>
+      <a href="https://github.com/EngMahmoudMagdy" target="_blank" rel="noopener noreferrer" class="contact-item"><i class="fab fa-github"></i> EngMahmoudMagdy</a>
     </div>
   </div>
 
-  <!-- code snippet like mohamed hussein example (class MahmoudMagdy extends ...) -->
-  <div class="code-snippet">
+  <div class="code-snippet" id="spotlight">
             <pre>
 <span class="keyword">class</span> <span style="color:#f472b6;">MahmoudMagdy</span> <span class="keyword">extends</span> <span style="color:#60a5fa;">MobileDeveloper</span> {
   <span class="property">final</span> experience = <span class="string">'7+ years'</span>;
@@ -470,9 +811,7 @@
 }</pre>
   </div>
 
-  <!-- two columns: about + skills left, something else right? but let's follow mohu style: left about + education, right skills and tools -->
-  <div class="grid-2col">
-    <!-- left column: get to know me / about / education / location -->
+  <div class="grid-2col" id="about">
     <div class="glass-panel">
       <div class="section-title"><i class="fas fa-user-astronaut"></i> Get to know me</div>
       <div class="about-text">
@@ -484,13 +823,11 @@
         <div class="info-item"><span class="info-label">🎓 education</span><div class="info-value">B.Sc. Computer Engineering</div></div>
         <div class="info-item"><span class="info-label">⚡ status</span><div class="info-value">Open to relocate</div></div>
       </div>
-      <!-- achievements line -->
       <div style="margin-top: 1.5rem; background: #1a2e46; padding: 1rem; border-radius: 1.5rem;">
         <i class="fas fa-award" style="color: #facc15;"></i> Mobile Application Launchpad Certificate · Google, MCIT 2016
       </div>
     </div>
 
-    <!-- right column: skills cloud (technical expertise) -->
     <div class="glass-panel">
       <div class="section-title"><i class="fas fa-code"></i> Technical Expertise</div>
       <div class="skill-category">Languages & Frameworks</div>
@@ -512,78 +849,287 @@
     </div>
   </div>
 
-  <!-- professional journey (experience) -->
-  <div style="margin: 2rem 0 1rem;">
-    <div class="section-title"><i class="fas fa-briefcase"></i> Professional Journey</div>
-  </div>
-
-  <div class="exp-item">
-    <div class="exp-header"><span class="exp-role">Senior Android Developer</span><span class="exp-date">Feb 2024 – present</span></div>
-    <div class="exp-company">Mazaady · Dubai (remote)</div>
-    <div>Maintain Mazaady app (100k+ users), develop features for Doworkss App (100k+ downloads), built JobSeekk hiring platform.</div>
-    <div style="margin-top:0.8rem"><i class="fas fa-wrench" style="color:#facc15;"></i> Kotlin · Clean Arch · XML · JIRA</div>
-  </div>
-
-  <div class="exp-item">
-    <div class="exp-header"><span class="exp-role">Senior Mobile Developer</span><span class="exp-date">Apr 2023 – Feb 2024</span></div>
-    <div class="exp-company">LBC Fleet · Arizona, USA (remote)</div>
-    <div>Maintained Android Driver app (500+ truck drivers). Developed Flutter app for iOS/Android, added accident reporting & damage tracking.</div>
-    <div style="margin-top:0.8rem">Flutter · Dart · TDD · BLoC · Clean Arch</div>
-  </div>
-
-  <div class="exp-item">
-    <div class="exp-header"><span class="exp-role">Mobile Engineer</span><span class="exp-date">Jan 2022 – Apr 2023</span></div>
-    <div class="exp-company">Extenda Retail · Amsterdam (remote)</div>
-    <div>Maintained My-Scan & MyAttendant for 5 European retailers. Built white-label Flutter app + Side-Kick for Zebra EMDK.</div>
-    <div style="margin-top:0.8rem">Flutter · MQTT · Jenkins · TDD</div>
-  </div>
-
-  <div class="exp-item">
-    <div class="exp-header"><span class="exp-role">Android Engineer</span><span class="exp-date">Nov 2020 – Jan 2022</span></div>
-    <div class="exp-company">Koinz · Cairo</div>
-    <div>Migrated payment to Amazon Payfort. Social virality feature (30k+ active users), enhanced entry points for 800k+ users.</div>
-    <div style="margin-top:0.8rem">Kotlin · Firebase · Amplitude · GitLab CI</div>
-  </div>
-
-  <!-- Featured projects (like in mohu's portfolio) -->
-  <div style="margin: 2.5rem 0 1rem;">
-    <div class="section-title"><i class="fas fa-rocket"></i> Featured Projects</div>
-  </div>
-
-  <div class="projects-grid">
-    <div class="project-card">
-      <div class="project-name">Mazaady <span style="font-size:1rem;">🇦🇪</span></div>
-      <div class="project-platform">social commerce · 100k+ users</div>
-      <div class="project-desc">Maintained high‑traffic Android app, new features, performance tuning.</div>
-      <div class="project-tags"><span class="mini-tag">Kotlin</span><span class="mini-tag">Clean Arch</span><span class="mini-tag">REST</span></div>
+  <div class="exp-block" id="experience">
+    <div style="margin: 2rem 0 1rem;">
+      <div class="section-title"><i class="fas fa-briefcase"></i> Professional Journey</div>
     </div>
-    <div class="project-card">
-      <div class="project-name">Doworkss</div>
-      <div class="project-platform">service marketplace</div>
-      <div class="project-desc">100k+ downloads — developed features using Kotlin and Firebase.</div>
-      <div class="project-tags"><span class="mini-tag">Kotlin</span><span class="mini-tag">Firebase</span><span class="mini-tag">FCM</span></div>
+
+    <div class="exp-item">
+      <div class="exp-header"><span class="exp-role">Senior Android Developer</span><span class="exp-date">Feb 2024 – present</span></div>
+      <div class="exp-company">Mazaady · Dubai (remote)</div>
+      <div>Maintain Mazaady app (100k+ users), develop features for Doworkss App (100k+ downloads), built JobSeekk hiring platform.</div>
+      <div style="margin-top:0.8rem"><i class="fas fa-wrench" style="color:#facc15;"></i> Kotlin · Clean Arch · XML · JIRA</div>
     </div>
-    <div class="project-card">
-      <div class="project-name">LBC Driver</div>
-      <div class="project-platform">Flutter · USA fleet</div>
-      <div class="project-desc">Android & iOS driver app with accident reporting, used by 500+ drivers.</div>
-      <div class="project-tags"><span class="mini-tag">Flutter</span><span class="mini-tag">BLoC</span><span class="mini-tag">Maps</span></div>
+
+    <div class="exp-item">
+      <div class="exp-header"><span class="exp-role">Senior Mobile Developer</span><span class="exp-date">Apr 2023 – Feb 2024</span></div>
+      <div class="exp-company">LBC Fleet · Arizona, USA (remote)</div>
+      <div>Maintained Android Driver app (500+ truck drivers). Developed Flutter app for iOS/Android, added accident reporting & damage tracking.</div>
+      <div style="margin-top:0.8rem">Flutter · Dart · TDD · BLoC · Clean Arch</div>
     </div>
-    <div class="project-card">
-      <div class="project-name">Zari</div>
-      <div class="project-platform">marketplace (buy/sell cars)</div>
-      <div class="project-desc">65% perf. boost with GraphQL + Firebase realtime.</div>
-      <div class="project-tags"><span class="mini-tag">GraphQL</span><span class="mini-tag">Apollo</span><span class="mini-tag">Kotlin</span></div>
+
+    <div class="exp-item">
+      <div class="exp-header"><span class="exp-role">Mobile Engineer</span><span class="exp-date">Jan 2022 – Apr 2023</span></div>
+      <div class="exp-company">Extenda Retail · Amsterdam (remote)</div>
+      <div>Maintained My-Scan & MyAttendant for 5 European retailers. Built white-label Flutter app + Side-Kick for Zebra EMDK.</div>
+      <div style="margin-top:0.8rem">Flutter · MQTT · Jenkins · TDD</div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header"><span class="exp-role">Android Engineer</span><span class="exp-date">Nov 2020 – Jan 2022</span></div>
+      <div class="exp-company">Koinz · Cairo</div>
+      <div>Migrated payment to Amazon Payfort. Social virality feature (30k+ active users), enhanced entry points for 800k+ users.</div>
+      <div style="margin-top:0.8rem">Kotlin · Firebase · Amplitude · GitLab CI</div>
     </div>
   </div>
 
-  <!-- footer -->
+  <section class="projects-section" id="projects" aria-labelledby="projects-heading">
+    <div class="section-title" id="projects-heading"><i class="fas fa-rocket"></i> Projects</div>
+    <p class="about-text" style="margin-bottom:1.5rem;">Shipped apps across Flutter and native Android — store links match my CV. Each card shows screenshots under the header; MyScan uses a full-width row with a wide landscape shot.</p>
+
+    <h3 class="projects-subtitle"><img src="badges/flutter.png" alt="" class="projects-subtitle-flutter" width="36" height="36" decoding="async" aria-hidden="true"> Flutter</h3>
+    <div class="projects-grid-showcase">
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://play.google.com/store/apps/details?id=com.bandeja.bandeja&hl=ar" target="_blank" rel="noopener noreferrer" title="Bandeja on Google Play"><img src="screenshots/bandeja/bandeja_logo.webp" alt="Bandeja app logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">Bandeja</h4>
+            <div class="project-showcase-meta">Android &amp; iOS · online padel community</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Padel community app for ongoing challenges: assessment and starting rating, leaderboard play, earn and spend BANDEJA Bars in the shop, track stats and achievements, and follow what others are playing — your padel network in one place.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/bandeja/bandeja1.webp" alt="Bandeja screenshot 1" loading="lazy">
+          <img src="screenshots/bandeja/bandeja2.webp" alt="Bandeja screenshot 2" loading="lazy">
+        </div>
+        <div class="store-badges">
+          <a href="https://play.google.com/store/apps/details?id=com.bandeja.bandeja&hl=ar" target="_blank" rel="noopener noreferrer" title="Get it on Google Play"><img src="badges/get_it_on_google_play_badge.webp" alt="Get it on Google Play"></a>
+          <a href="https://apps.apple.com/eg/app/bandeja/id1665473421?l=ar" target="_blank" rel="noopener noreferrer" title="Download on the App Store"><img src="badges/download_on_apple_store_badge.png" alt="Download on the App Store"></a>
+        </div>
+        <div class="project-tags"><span class="mini-tag">Flutter</span><span class="mini-tag">iOS</span><span class="mini-tag">Android</span></div>
+      </article>
+
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://play.google.com/store/apps/details?id=com.al7osam.sayarah_worker&hl=ar" target="_blank" rel="noopener noreferrer" title="Syarah Worker on Google Play"><img src="screenshots/syarah/worker/syarah_worker_logo.webp" alt="Syarah Worker app logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">Syarah Worker</h4>
+            <div class="project-showcase-meta">Worker app · Android &amp; iOS</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Worker-side companion for Syarah’s fleet fuel program: control how fuel is shared and monitor consumption for each vehicle in your company’s car plan.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/syarah/worker/syarah_worker_1.webp" alt="Syarah Worker screenshot 1" loading="lazy">
+          <img src="screenshots/syarah/worker/syarah_worker_2.webp" alt="Syarah Worker screenshot 2" loading="lazy">
+        </div>
+        <div class="store-badges">
+          <a href="https://play.google.com/store/apps/details?id=com.al7osam.sayarah_worker&hl=ar" target="_blank" rel="noopener noreferrer" title="Get it on Google Play"><img src="badges/get_it_on_google_play_badge.webp" alt="Get it on Google Play"></a>
+        </div>
+        <div class="project-tags"><span class="mini-tag">Flutter</span><span class="mini-tag">Logistics</span></div>
+      </article>
+
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://play.google.com/store/apps/details?id=com.al7osam.sayarhDriver&hl=ar" target="_blank" rel="noopener noreferrer" title="Syarah Driver on Google Play"><img src="screenshots/syarah/driver/syarah_driver_logo.webp" alt="Syarah Driver app logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">Syarah Driver</h4>
+            <div class="project-showcase-meta">Driver app · Android &amp; iOS</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Driver app for Syarah’s fuel-efficiency program: streamline consumption through shared-fuel controls and per-vehicle usage tracking across the corporate fleet plan.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/syarah/driver/syarah_driver1.webp" alt="Syarah Driver screenshot 1" loading="lazy">
+          <img src="screenshots/syarah/driver/syarah_driver2.webp" alt="Syarah Driver screenshot 2" loading="lazy">
+        </div>
+        <div class="store-badges">
+          <a href="https://play.google.com/store/apps/details?id=com.al7osam.sayarhDriver&hl=ar" target="_blank" rel="noopener noreferrer" title="Get it on Google Play"><img src="badges/get_it_on_google_play_badge.webp" alt="Get it on Google Play"></a>
+          <a href="https://apps.apple.com/eg/app/syarah-driver/id6739496753?l=ar" target="_blank" rel="noopener noreferrer" title="Download on the App Store"><img src="badges/download_on_apple_store_badge.png" alt="Download on the App Store"></a>
+        </div>
+        <div class="project-tags"><span class="mini-tag">Flutter</span><span class="mini-tag">Maps</span></div>
+      </article>
+
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://play.google.com/store/apps/details?id=com.dotcompliance.driver&pli=1" target="_blank" rel="noopener noreferrer" title="LBC Driver on Google Play"><img src="screenshots/lbc/lbc_driver_logo.webp" alt="LBC Driver app logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">LBC Fleet Driver</h4>
+            <div class="project-showcase-meta">USA fleet · accident &amp; damage tracking</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Electronic logging for over-the-road, local, and mixed fleets: compliant e-logs with or without ELD, short-haul exempt detection, vehicle inspection, driver and fleet management, plus damage tracking, documents, cost per mile, and utilization.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/lbc/lbc_driver_1.webp" alt="LBC Driver screenshot 1" loading="lazy">
+          <img src="screenshots/lbc/lbc_driver_2.webp" alt="LBC Driver screenshot 2" loading="lazy">
+          <img src="screenshots/lbc/lbc_driver_3.webp" alt="LBC Driver screenshot 3" loading="lazy">
+        </div>
+        <div class="store-badges">
+          <a href="https://play.google.com/store/apps/details?id=com.dotcompliance.driver&pli=1" target="_blank" rel="noopener noreferrer" title="Get it on Google Play"><img src="badges/get_it_on_google_play_badge.webp" alt="Get it on Google Play"></a>
+          <a href="https://apps.apple.com/us/app/lbc-driver/id1239613634" target="_blank" rel="noopener noreferrer" title="Download on the App Store"><img src="badges/download_on_apple_store_badge.png" alt="Download on the App Store"></a>
+        </div>
+        <div class="project-tags"><span class="mini-tag">Flutter</span><span class="mini-tag">BLoC</span><span class="mini-tag">TDD</span></div>
+      </article>
+
+      <article class="project-showcase project-showcase--fullrow">
+        <div class="project-showcase-body">
+          <div class="project-showcase-top">
+            <a class="project-logo-link" href="https://www.linkedin.com/products/re-visionbv-revision-selfscanning-scango/" target="_blank" rel="noopener noreferrer" title="Re-Vision MyScan on LinkedIn"><img src="screenshots/myscan/revision_logo.jpeg" alt="Re-Vision / MyScan logo"></a>
+            <div class="project-showcase-heading">
+              <h4 class="project-showcase-name">MyScan (Re‑Vision)</h4>
+              <div class="project-showcase-meta">Retail self‑scanning · Extenda</div>
+            </div>
+          </div>
+          <p class="project-showcase-desc">Re‑Vision’s Scan&amp;Go portfolio supports omni‑channel retail and BYOD — My‑Scan™ and My‑iScan™ keep the same self‑scan experience on enterprise hardware and smartphones. Highly scalable across stores and countries, with retail algorithms that spotlight patterns to grow sales and cut shrink.</p>
+          <p class="project-showcase-desc" style="font-size:0.85rem;color:#93b1db;">No public store listing in CV — tap the logo for the product overview.</p>
+          <div class="project-tags"><span class="mini-tag">Flutter</span><span class="mini-tag">MQTT</span><span class="mini-tag">Retail</span></div>
+        </div>
+        <div class="project-screenshots project-screenshots--landscape">
+          <img src="screenshots/myscan/myscan1.jpeg" alt="MyScan screenshot" loading="lazy">
+        </div>
+      </article>
+    </div>
+
+    <h3 class="projects-subtitle"><i class="fab fa-android" style="color:#3DDC84;"></i> Android</h3>
+    <div class="projects-grid-showcase">
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://mazaady.com/" target="_blank" rel="noopener noreferrer" title="Mazaady website"><img src="screenshots/mazaady/mazaady_logo.webp" alt="Mazaady app logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">Mazaady</h4>
+            <div class="project-showcase-meta">Auction commerce · wholesalers, retailers &amp; individuals · 100k+ users</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Auction marketplace for wholesalers, retailers, and shoppers across 55+ structured categories: list new or used goods, run live video or audio sales, group multiple products in one auction, and reschedule or pass to the next bidder without relisting. Built to connect sellers with buyers locally or abroad, with payments and shipping experience evolving on the roadmap.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/mazaady/mazaady1.webp" alt="Mazaady screenshot 1" loading="lazy">
+          <img src="screenshots/mazaady/mazaady2.webp" alt="Mazaady screenshot 2" loading="lazy">
+        </div>
+        <div class="store-badges">
+          <a href="https://play.google.com/store/apps/details?id=com.mazaady&hl=en" target="_blank" rel="noopener noreferrer" title="Get it on Google Play"><img src="badges/get_it_on_google_play_badge.webp" alt="Get it on Google Play"></a>
+        </div>
+        <div class="project-tags"><span class="mini-tag">Kotlin</span><span class="mini-tag">Clean Arch</span><span class="mini-tag">REST</span></div>
+      </article>
+
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://play.google.com/store/apps/details?id=com.doworkss" target="_blank" rel="noopener noreferrer" title="Doworkss on Google Play"><img src="screenshots/doworkss/doworkss_logo.webp" alt="Doworkss app logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">Doworkss</h4>
+            <div class="project-showcase-meta">Free services platform · Mazaady · 100k+ downloads</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Mazaady’s free services marketplace across 240+ categories: publish offers or requests, connect in-app, and let providers respond at no cost so you skip endless searching. One profile can hold multiple listings as provider, requester, or both — built to grow income, customers, and know‑how.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/doworkss/doworkss1.webp" alt="Doworkss screenshot 1" loading="lazy">
+          <img src="screenshots/doworkss/doworkss2.webp" alt="Doworkss screenshot 2" loading="lazy">
+          <img src="screenshots/doworkss/doworkss3.webp" alt="Doworkss screenshot 3" loading="lazy">
+        </div>
+        <div class="store-badges">
+          <a href="https://play.google.com/store/apps/details?id=com.doworkss" target="_blank" rel="noopener noreferrer" title="Get it on Google Play"><img src="badges/get_it_on_google_play_badge.webp" alt="Get it on Google Play"></a>
+        </div>
+        <div class="project-tags"><span class="mini-tag">Kotlin</span><span class="mini-tag">Firebase</span><span class="mini-tag">FCM</span></div>
+      </article>
+
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://www.jobseekk.com/en" target="_blank" rel="noopener noreferrer" title="JobSeekk"><img src="screenshots/jobseek/jobseek_logo.jpg" alt="JobSeekk logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">JobSeekk</h4>
+            <div class="project-showcase-meta">Hiring platform</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Hiring product so candidates find roles, talk to companies, and accept offers — developed at Mazaady.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/jobseek/jobseek_logo.jpg" alt="JobSeekk preview" loading="lazy">
+        </div>
+        <p class="project-showcase-desc" style="font-size:0.85rem;color:#93b1db;">No store links on CV — open the site via the logo.</p>
+        <div class="project-tags"><span class="mini-tag">Kotlin</span><span class="mini-tag">Product</span></div>
+      </article>
+
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://koinz.app/" target="_blank" rel="noopener noreferrer" title="Koinz"><img src="screenshots/koinz/koinz_logo.png" alt="Koinz app logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">Koinz</h4>
+            <div class="project-showcase-meta">Social food ordering · loyalty &amp; reels · Egypt</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Koinz is a social food‑ordering platform that helps turn walk‑ins into ambassadors: guests order ahead, earn points, share reels about your venue, and your brand can gain thousands of loyal followers.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/koinz/koinz1.webp" alt="Koinz screenshot 1" loading="lazy">
+          <img src="screenshots/koinz/koinz2.webp" alt="Koinz screenshot 2" loading="lazy">
+        </div>
+        <p class="project-showcase-desc" style="font-size:0.85rem;color:#93b1db;">Store links not listed on CV — use the logo for the product site.</p>
+        <div class="project-tags"><span class="mini-tag">Kotlin</span><span class="mini-tag">Firebase</span><span class="mini-tag">Maps</span></div>
+      </article>
+
+      <article class="project-showcase">
+        <div class="project-showcase-top">
+          <a class="project-logo-link" href="https://www.behance.net/gallery/97283387/Zari-Mobile-app" target="_blank" rel="noopener noreferrer" title="Zari case study on Behance"><img src="screenshots/zari/zari_logo.PNG" alt="Zari app logo"></a>
+          <div class="project-showcase-heading">
+            <h4 class="project-showcase-name">Zari</h4>
+            <div class="project-showcase-meta">Secondhand marketplace · GCC · Android</div>
+          </div>
+        </div>
+        <p class="project-showcase-desc">Zari is a local community marketplace in the GCC for buying and selling used items—an easy Android app for direct peer‑to‑peer trade. Shop for pre‑owned consoles, laptops, phones, books, toys, or list what you no longer need; listings go live in under a minute and you connect with buyers through in‑app private messages.</p>
+        <div class="project-screenshots">
+          <img src="screenshots/zari/zari1.JPG" alt="Zari screenshot 1" loading="lazy">
+          <img src="screenshots/zari/zari2.JPG" alt="Zari screenshot 2" loading="lazy">
+          <img src="screenshots/zari/zari3.JPG" alt="Zari screenshot 3" loading="lazy">
+          <img src="screenshots/zari/zari4.JPG" alt="Zari screenshot 4" loading="lazy">
+        </div>
+        <p class="project-showcase-desc" style="font-size:0.85rem;color:#93b1db;">Case study and extra visuals on Behance — tap the logo. Engineering: GraphQL + Firebase helped cut API overhead ~65%.</p>
+        <div class="project-tags"><span class="mini-tag">Kotlin</span><span class="mini-tag">GraphQL</span><span class="mini-tag">Apollo</span></div>
+      </article>
+    </div>
+  </section>
+
   <div class="footer-note">
-    <i class="fas fa-crown" style="color: #facc15;"></i> Mahmoud Magdy · Senior Mobile Engineer · 2025
+    <i class="fas fa-crown" style="color: #facc15;"></i> Mahmoud Magdy · Senior Mobile Engineer · 2026
     <br>
-    <a href="https://github.com/EngMahmoudMagdy" target="_blank" style="margin: 0 8px;"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/mahmoudmagdy7" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/EngMahmoudMagdy" target="_blank" rel="noopener noreferrer" style="margin: 0 8px;"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/mahmoudmagdy7" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
   </div>
 </div>
+
+<script>
+(function () {
+  var toggle = document.getElementById('navToggle');
+  var drawer = document.getElementById('navDrawer');
+  var overlay = document.getElementById('navOverlay');
+  var closeBtn = document.getElementById('navDrawerClose');
+
+  function openDrawer() {
+    drawer.classList.add('is-open');
+    overlay.classList.add('is-open');
+    overlay.hidden = false;
+    drawer.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    overlay.hidden = true;
+    drawer.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  if (toggle) toggle.addEventListener('click', function () {
+    if (drawer.classList.contains('is-open')) closeDrawer(); else openDrawer();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (overlay) overlay.addEventListener('click', closeDrawer);
+
+  drawer.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function () { closeDrawer(); });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer();
+  });
+})();
+</script>
 </body>
 </html>
